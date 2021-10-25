@@ -48,17 +48,18 @@ sprites.onDestroyed(SpriteKind.Food, function (sprite) {
         snakeEnemy.follow(mySprite, 30)
     }
 })
+function GrowTail () {
+    mySprite4 = sprites.allOfKind(SpriteKind.Player)
+}
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     score += 1
+    pause(50)
     mySprite2.destroy()
-    PlayerY = mySprite.y
-    PlayerX = mySprite.x
-    pause(1000)
-    tiles.setTileAt(tiles.getTileLocation(PlayerY, PlayerX), assets.tile`myTile`)
 })
 let PlayerX = 0
 let PlayerY = 0
 let score = 0
+let mySprite4: Sprite[] = []
 let snakeEnemy: Sprite = null
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
@@ -66,22 +67,22 @@ let myScore = 0
 let maxScore = 100
 tiles.setTilemap(tilemap`level1`)
 mySprite = sprites.create(img`
-    . . . . 3 3 3 3 . . . . . . . . 
-    . . . . . 3 3 3 3 . . . . . . . 
-    . . . . 3 3 3 3 3 3 . . . . . . 
-    . . . 3 3 3 3 3 3 3 3 3 . . . . 
-    . . . 3 3 3 3 3 3 . 3 3 3 . . . 
-    . . . 3 3 3 3 3 3 3 3 3 3 . . . 
-    . . . 3 3 3 3 3 3 3 3 3 3 . . . 
-    . . . 3 3 3 3 3 3 3 3 3 3 . . . 
-    . . . 3 . 3 3 3 3 3 3 3 3 . . . 
-    . . . . 3 . 3 3 3 3 3 . 3 . . . 
-    . . . . . 3 3 . 3 3 3 3 3 3 . . 
-    . . . . . . . 3 3 3 3 3 3 . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
     `, SpriteKind.Player)
 tiles.placeOnTile(mySprite, tiles.getTileLocation(1, 1))
 mySprite2 = sprites.create(img`
@@ -104,3 +105,27 @@ mySprite2 = sprites.create(img`
     `, SpriteKind.Food)
 tiles.placeOnRandomTile(mySprite2, assets.tile`transparency16`)
 scene.cameraFollowSprite(mySprite)
+let mySprite3 = sprites.create(img`
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    `, SpriteKind.Player)
+forever(function () {
+    PlayerY = mySprite.y
+    PlayerX = mySprite.x
+    pause(50)
+    mySprite3.setPosition(PlayerX, PlayerY)
+})
