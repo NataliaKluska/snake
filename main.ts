@@ -1,6 +1,3 @@
-controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
-    controller.moveSprite(mySprite)
-})
 sprites.onDestroyed(SpriteKind.Food, function (sprite) {
     for (let index = 0; index <= 1; index++) {
         index += 1
@@ -48,29 +45,40 @@ sprites.onDestroyed(SpriteKind.Food, function (sprite) {
         snakeEnemy.follow(mySprite, 30)
     }
 })
+controller.anyButton.onEvent(ControllerButtonEvent.Pressed, function () {
+    controller.moveSprite(mySprite)
+})
 function GrowTail () {
+    let mySprite4: Sprite = null
     pause(50)
     mySprite4.setPosition(PlayerX, PlayerY)
 }
+info.onLifeZero(function () {
+    game.over(false)
+    pause(1000)
+    game.showLongText(myScore, DialogLayout.Bottom)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
-    score += 1
+    myScore += 1
     pause(50)
     mySprite2.destroy()
 })
-let score = 0
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+})
 let PlayerY = 0
 let PlayerX = 0
 let snakeEnemy: Sprite = null
-let mySprite4: Sprite = null
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
 let myScore = 0
+myScore = 0
 let maxScore = 100
 tiles.setTilemap(tilemap`level1`)
 mySprite = sprites.create(img`
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 f 3 3 3 3 f 3 3 3 3 3 
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
@@ -124,24 +132,8 @@ let mySprite3 = sprites.create(img`
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
     `, SpriteKind.Player)
-mySprite4 = sprites.create(img`
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
-    `, SpriteKind.Player)
+mySprite.setVelocity(50, 50)
+info.setLife(3)
 forever(function () {
     PlayerY = mySprite.y
     PlayerX = mySprite.x
