@@ -49,18 +49,19 @@ sprites.onDestroyed(SpriteKind.Food, function (sprite) {
     }
 })
 function GrowTail () {
-    mySprite4 = sprites.allOfKind(SpriteKind.Player)
+    pause(50)
+    mySprite4.setPosition(PlayerX, PlayerY)
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     score += 1
     pause(50)
     mySprite2.destroy()
 })
-let PlayerX = 0
-let PlayerY = 0
 let score = 0
-let mySprite4: Sprite[] = []
+let PlayerY = 0
+let PlayerX = 0
 let snakeEnemy: Sprite = null
+let mySprite4: Sprite = null
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
 let myScore = 0
@@ -106,6 +107,24 @@ mySprite2 = sprites.create(img`
 tiles.placeOnRandomTile(mySprite2, assets.tile`transparency16`)
 scene.cameraFollowSprite(mySprite)
 let mySprite3 = sprites.create(img`
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
+    `, SpriteKind.Player)
+mySprite4 = sprites.create(img`
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
     3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 
